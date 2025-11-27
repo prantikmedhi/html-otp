@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Printable OMR Sheet</title>
+    <style>
+        /* Basic Page Reset */
+        * {
+            box-sizing: border-box;
+            -webkit-print-color-adjust: exact; /* Ensure colors print correctly */
+            print-color-adjust: exact;
+        }
+
+        body {
+            margin: 0;
+            padding: 20px;
+            background-color: #f0f0f0; /* Light gray background for screen view */
+            font-family: Arial, sans-serif;
+        }
+
+        /* The Main Paper Container */
+        .omr-paper {
+            background-color: white;
+            width: 210mm; /* A4 width */
+            min-height: 297mm; /* A4 height */
+            margin: 0 auto; /* Center on screen */
+            padding: 30px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+            border: 1px solid #d3d3d3;
+        }
+
+        /* --- Header Section --- */
+        .header {
+            text-align: center;
+            border-bottom: 2px solid black;
+            padding-bottom: 20px;
+            margin-bottom: 20px;
+        }
+
+        .header h1 {
+            margin: 0 0 10px 0;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+
+        .student-details {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            margin-top: 20px;
+            text-align: left;
+        }
+
+        .detail-field {
+            flex-basis: 45%;
+            margin-bottom: 15px;
+            font-size: 14px;
+        }
+
+        .input-line {
+            display: inline-block;
+            width: 60%;
+            border-bottom: 1px dotted black;
+            margin-left: 10px;
+        }
+
+        /* --- Instructions --- */
+        .instructions {
+            font-size: 12px;
+            background-color: #eee;
+            padding: 10px;
+            border: 1px solid #ccc;
+            margin-bottom: 25px;
+        }
+        .instructions strong { margin-right: 5px; color: #d9534f;}
+
+        /* --- Main Question Container Grid --- */
+        /* We use CSS Grid to create 3 equal columns of questions */
+        .questions-container {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr); /* 3 Columns */
+            gap: 30px; /* Space between columns */
+        }
+
+        .column-header {
+            text-align: center;
+            font-weight: bold;
+            margin-bottom: 10px;
+            text-transform: uppercase;
+            font-size: 14px;
+        }
+
+        /* Individual Question Row Styling */
+        .q-row {
+            display: flex;
+            align-items: center;
+            margin-bottom: 8px; /* Space between questions */
+            padding: 2px 0;
+        }
+
+        .q-num {
+            font-weight: bold;
+            width: 35px;
+            text-align: right;
+            margin-right: 15px;
+            font-size: 14px;
+        }
+
+        /* The OMR Options Container */
+        .options {
+            display: flex;
+            gap: 10px; /* Space between bubbles */
+        }
+
+        /* --- The Bubble Styling --- */
+        /* This is the core OMR look */
+        .bubble {
+            width: 28px;
+            height: 28px;
+            border-radius: 50%;
+            border: 1.5px solid #333;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 12px;
+            font-weight: bold;
+            color: #555;
+            cursor: pointer; /* Makes it feel interactive on screen */
+            transition: background-color 0.1s;
+            user-select: none;
+        }
+
+        /* Simulating filling the bubble on click/hover for visual effect on screen */
+        .bubble:hover {
+            background-color: #e0e0e0;
+        }
+        .bubble:active {
+            background-color: black;
+            color: white;
+        }
+
+
+        /* --- PRINT SPECIFIC CSS --- */
+        @media print {
+            body {
+                margin: 0;
+                padding: 0;
+                background-color: white;
+            }
+            .omr-paper {
+                box-shadow: none;
+                border: none;
+                margin: 0;
+                width: 100%;
+                page-break-after: always;
+            }
+            /* Hide hover effects when printing */
+            .bubble:hover, .bubble:active {
+                background-color: transparent;
+                color: #555;
+            }
+        }
+
+    </style>
+</head>
+<body>
+
+<div class="omr-paper">
+
+    <div class="header">
+        <h1>OMR Answer Sheet</h1>
+        <div class="student-details">
+            <div class="detail-field">
+                Candidate Name: <span class="input-line"></span>
+            </div>
+            <div class="detail-field">
+                Date of Exam: <span class="input-line"></span>
+            </div>
+            <div class="detail-field">
+                Roll Number: <span class="input-line"></span>
+            </div>
+            <div class="detail-field">
+                Test ID / Subject: <span class="input-line"></span>
+            </div>
+        </div>
+    </div>
+
+    <div class="instructions">
+        <strong>INSTRUCTIONS:</strong>
+        1. Use only Blue or Black Ball Point Pen to completely fill the circles.
+        2. Darken ONE circle per question completely. Mark only one choice for each question.
+        3. Do not use whitener or eraser to change an answer.
+        4. Do not fold or wrinkle this sheet.
+    </div>
+
+    <div class="questions-container">
+
+        <div class="q-column">
+            <div class="column-header">Questions 1 - 20</div>
+            
+            <div class="q-row"><div class="q-num">1.</div><div class="options"><div class="bubble">A</div><div class="bubble">B</div><div class="bubble">C</div><div class="bubble">D</div></div></div>
+            <div class="q-row"><div class="q-num">2.</div><div class="options"><div class="bubble">A</div><div class="bubble">B</div><div class="bubble">C</div><div class="bubble">D</div></div></div>
+            <div class="q-row"><div class="q-num">3.</div><div class="options"><div class="bubble">A</div><div class="bubble">B</div><div class="bubble">C</div><div class="bubble">D</div></div></div>
+            <div class="q-row"><div class="q-num">4.</div><div class="options"><div class="bubble">A</div><div class="bubble">B</div><div class="bubble">C</div><div class="bubble">D</div></div></div>
+            <div class="q-row"><div class="q-num">5.</div><div class="options"><div class="bubble">A</div><div class="bubble">B</div><div class="bubble">C</div><div class="bubble">D</div></div></div>
+            <div class="q-row"><div class="q-num">6.</div><div class="options"><div class="bubble">A</div><div class="bubble">B</div><div class="bubble">C</div><div class="bubble">D</div></div></div>
+            <div class="q-row"><div class="q-num">7.</div><div class="options"><div class="bubble">A</div><div class="bubble">B</div><div class="bubble">C</div><div class="bubble">D</div></div></div>
+            <div class="q-row"><div class="q-num">8.</div><div class="options"><div class="bubble">A</div><div class="bubble">B</div><div class="bubble">C</div><div class="bubble">D</div></div></div>
+            <div class="q-row"><div class="q-num">9.</div><div class="options"><div class="bubble">A</div><div class="bubble">B</div><div class="bubble">C</div><div class="bubble">D</div></div></div>
+            <div class="q-row"><div class="q-num">10.</div><div class="options"><div class="bubble">A</div><div class="bubble">B</div><div class="bubble">C</div><div class="bubble">D</div></div></div>
+            <div class="q-row"><div class="q-num">11.</div><div class="options"><div class="bubble">A</div><div class="bubble">B</div><div class="bubble">C</div><div class="bubble">D</div></div></div>
+            <div class="q-row"><div class="q-num">12.</div><div class="options"><div class="bubble">A</div><div class="bubble">B</div><div class="bubble">C</div><div class="bubble">D</div></div></div>
+            <div class="q-row"><div class="q-num">13.</div><div class="options"><div class="bubble">A</div><div class="bubble">B</div><div class="bubble">C</div><div class="bubble">D</div></div></div>
+            <div class="q-row"><div class="q-num">14.</div><div class="options"><div class="bubble">A</div><div class="bubble">B</div><div class="bubble">C</div><div class="bubble">D</div></div></div>
+            <div class="q-row"><div class="q-num">15.</div><div class="options"><div class="bubble">A</div><div class="bubble">B</div><div class="bubble">C</div><div class="bubble">D</div></div></div>
+            <div class="q-row"><div class="q-num">16.</div><div class="options"><div class="bubble">A</div><div class="bubble">B</div><div class="bubble">C</div><div class="bubble">D</div></div></div>
+            <div class="q-row"><div class="q-num">17.</div><div class="options"><div class="bubble">A</div><div class="bubble">B</div><div class="bubble">C</div><div class="bubble">D</div></div></div>
+            <div class="q-row"><div class="q-num">18.</div><div class="options"><div class="bubble">A</div><div class="bubble">B</div><div class="bubble">C</div><div class="bubble">D</div></div></div>
+            <div class="q-row"><div class="q-num">19.</div><div class="options"><div class="bubble">A</div><div class="bubble">B</div><div class="bubble">C</div><div class="bubble">D</div></div></div>
+            <div class="q-row"><div class="q-num">20.</div><div class="options"><div class="bubble">A</div><div class="bubble">B</div><div class="bubble">C</div><div class="bubble">D</div></div></div>
+            </div>
+
+        <div class="q-column">
+            <div class="column-header">Questions 21 - 40</div>
+            <div class="q-row"><div class="q-num">21.</div><div class="options"><div class="bubble">A</div><div class="bubble">B</div><div class="bubble">C</div><div class="bubble">D</div></div></div>
+            <div class="q-row"><div class="q-num">22.</div><div class="options"><div class="bubble">A</div><div class="bubble">B</div><div class="bubble">C</div><div class="bubble">D</div></div></div>
+            <div class="q-row"><div class="q-num">23.</div><div class="options"><div class="bubble">A</div><div class="bubble">B</div><div class="bubble">C</div><div class="bubble">D</div></div></div>
+            <div class="q-row"><div class="q-num">24.</div><div class="options"><div class="bubble">A</div><div class="bubble">B</div><div class="bubble">C</div><div class="bubble">D</div></div></div>
+            <div class="q-row"><div class="q-num">25.</div><div class="options"><div class="bubble">A</div><div class="bubble">B</div><div class="bubble">C</div><div class="bubble">D</div></div></div>
+            <div class="q-row"><div class="q-num">26.</div><div class="options"><div class="bubble">A</div><div class="bubble">B</div><div class="bubble">C</div><div class="bubble">D</div></div></div>
+            <div class="q-row"><div class="q-num">27.</div><div class="options"><div class="bubble">A</div><div class="bubble">B</div><div class="bubble">C</div><div class="bubble">D</div></div></div>
+            <div class="q-row"><div class="q-num">28.</div><div class="options"><div class="bubble">A</div><div class="bubble">B</div><div class="bubble">C</div><div class="bubble">D</div></div></div>
+            <div class="q-row"><div class="q-num">29.</div><div class="options"><div class="bubble">A</div><div class="bubble">B</div><div class="bubble">C</div><div class="bubble">D</div></div></div>
+            <div class="q-row"><div class="q-num">30.</div><div class="options"><div class="bubble">A</div><div class="bubble">B</div><div class="bubble">C</div><div class="bubble">D</div></div></div>
+            <div class="q-row"><div class="q-num">31.</div><div class="options"><div class="bubble">A</div><div class="bubble">B</div><div class="bubble">C</div><div class="bubble">D</div></div></div>
+            <div class="q-row"><div class="q-num">32.</div><div class="options"><div class="bubble">A</div><div class="bubble">B</div><div class="bubble">C</div><div class="bubble">D</div></div></div>
+            <div class="q-row"><div class="q-num">33.</div><div class="options"><div class="bubble">A</div><div class="bubble">B</div><div class="bubble">C</div><div class="bubble">D</div></div></div>
+            <div class="q-row"><div class="q-num">34.</div><div class="options"><div class="bubble">A</div><div class="bubble">B</div><div class="bubble">C</div><div class="bubble">D</div></div></div>
+            <div class="q-row"><div class="q-num">35.</div><div class="options"><div class="bubble">A</div><div class="bubble">B</div><div class="bubble">C</div><div class="bubble">D</div></div></div>
+            <div class="q-row"><div class="q-num">36.</div><div class="options"><div class="bubble">A</div><div class="bubble">B</div><div class="bubble">C</div><div class="bubble">D</div></div></div>
+            <div class="q-row"><div class="q-num">37.</div><div class="options"><div class="bubble">A</div><div class="bubble">B</div><div class="bubble">C</div><div class="bubble">D</div></div></div>
+            <div class="q-row"><div class="q-num">38.</div><div class="options"><div class="bubble">A</div><div class="bubble">B</div><div class="bubble">C</div><div class="bubble">D</div></div></div>
+            <div class="q-row"><div class="q-num">39.</div><div class="options"><div class="bubble">A</div><div class="bubble">B</div><div class="bubble">C</div><div class="bubble">D</div></div></div>
+            <div class="q-row"><div class="q-num">40.</div><div class="options"><div class="bubble">A</div><div class="bubble">B</div><div class="bubble">C</div><div class="bubble">D</div></div></div>
+        </div>
+
+        <div class="q-column">
+            <div class="column-header">Questions 41 - 60</div>
+            <div class="q-row"><div class="q-num">41.</div><div class="options"><div class="bubble">A</div><div class="bubble">B</div><div class="bubble">C</div><div class="bubble">D</div></div></div>
+            <div class="q-row"><div class="q-num">42.</div><div class="options"><div class="bubble">A</div><div class="bubble">B</div><div class="bubble">C</div><div class="bubble">D</div></div></div>
+            <div class="q-row"><div class="q-num">43.</div><div class="options"><div class="bubble">A</div><div class="bubble">B</div><div class="bubble">C</div><div class="bubble">D</div></div></div>
+            <div class="q-row"><div class="q-num">44.</div><div class="options"><div class="bubble">A</div><div class="bubble">B</div><div class="bubble">C</div><div class="bubble">D</div></div></div>
+            <div class="q-row"><div class="q-num">45.</div><div class="options"><div class="bubble">A</div><div class="bubble">B</div><div class="bubble">C</div><div class="bubble">D</div></div></div>
+            <div class="q-row"><div class="q-num">46.</div><div class="options"><div class="bubble">A</div><div class="bubble">B</div><div class="bubble">C</div><div class="bubble">D</div></div></div>
+            <div class="q-row"><div class="q-num">47.</div><div class="options"><div class="bubble">A</div><div class="bubble">B</div><div class="bubble">C</div><div class="bubble">D</div></div></div>
+            <div class="q-row"><div class="q-num">48.</div><div class="options"><div class="bubble">A</div><div class="bubble">B</div><div class="bubble">C</div><div class="bubble">D</div></div></div>
+            <div class="q-row"><div class="q-num">49.</div><div class="options"><div class="bubble">A</div><div class="bubble">B</div><div class="bubble">C</div><div class="bubble">D</div></div></div>
+            <div class="q-row"><div class="q-num">50.</div><div class="options"><div class="bubble">A</div><div class="bubble">B</div><div class="bubble">C</div><div class="bubble">D</div></div></div>
+            <div class="q-row"><div class="q-num">51.</div><div class="options"><div class="bubble">A</div><div class="bubble">B</div><div class="bubble">C</div><div class="bubble">D</div></div></div>
+            <div class="q-row"><div class="q-num">52.</div><div class="options"><div class="bubble">A</div><div class="bubble">B</div><div class="bubble">C</div><div class="bubble">D</div></div></div>
+            <div class="q-row"><div class="q-num">53.</div><div class="options"><div class="bubble">A</div><div class="bubble">B</div><div class="bubble">C</div><div class="bubble">D</div></div></div>
+            <div class="q-row"><div class="q-num">54.</div><div class="options"><div class="bubble">A</div><div class="bubble">B</div><div class="bubble">C</div><div class="bubble">D</div></div></div>
+            <div class="q-row"><div class="q-num">55.</div><div class="options"><div class="bubble">A</div><div class="bubble">B</div><div class="bubble">C</div><div class="bubble">D</div></div></div>
+            <div class="q-row"><div class="q-num">56.</div><div class="options"><div class="bubble">A</div><div class="bubble">B</div><div class="bubble">C</div><div class="bubble">D</div></div></div>
+            <div class="q-row"><div class="q-num">57.</div><div class="options"><div class="bubble">A</div><div class="bubble">B</div><div class="bubble">C</div><div class="bubble">D</div></div></div>
+            <div class="q-row"><div class="q-num">58.</div><div class="options"><div class="bubble">A</div><div class="bubble">B</div><div class="bubble">C</div><div class="bubble">D</div></div></div>
+            <div class="q-row"><div class="q-num">59.</div><div class="options"><div class="bubble">A</div><div class="bubble">B</div><div class="bubble">C</div><div class="bubble">D</div></div></div>
+            <div class="q-row"><div class="q-num">60.</div><div class="options"><div class="bubble">A</div><div class="bubble">B</div><div class="bubble">C</div><div class="bubble">D</div></div></div>
+        </div>
+
+    </div> </div> </body>
+</html>
